@@ -12,14 +12,28 @@ import java.util.Date;
 public class Transaction {
 
     public ObjectId id;
+    @JsonIgnore
     public String userid;
     public String assetName;
     public String ticker;
-    public Integer average;
+    public Double average;
     public Integer quantity;
     public Date transactionDate;
 
-    public Transaction(String userid, String assetName, String ticker, Integer average, Integer quantity, Date transactionDate) {
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", userid='" + userid + '\'' +
+                ", assetName='" + assetName + '\'' +
+                ", ticker='" + ticker + '\'' +
+                ", average=" + average +
+                ", quantity=" + quantity +
+                ", transactionDate=" + transactionDate +
+                '}';
+    }
+
+    public Transaction(String userid, String assetName, String ticker, Double average, Integer quantity, Date transactionDate) {
         this.userid = userid;
         this.assetName = assetName;
         this.ticker = ticker;
