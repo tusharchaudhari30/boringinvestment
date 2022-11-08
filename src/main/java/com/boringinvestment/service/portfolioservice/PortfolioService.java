@@ -6,7 +6,6 @@ import com.boringinvestment.model.Stock;
 import com.boringinvestment.model.Transaction;
 import com.boringinvestment.repository.TransactionRepository;
 import com.boringinvestment.service.yahoofinance.YahoofinanceRest;
-import io.smallrye.common.constraint.NotNull;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -39,6 +38,8 @@ public class PortfolioService {
         });
         portfolio.transactionList=transactionList;
         quantityMap.forEach((s, stock) -> portfolio.addStock(stock));
+        portfolio.profit=portfolio.holding- portfolio.invested;
+        portfolio.percentageReturn= portfolio.profit / portfolio.invested * 100;
         return  portfolio;
     }
 }

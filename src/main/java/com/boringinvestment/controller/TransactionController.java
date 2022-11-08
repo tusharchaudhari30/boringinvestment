@@ -26,7 +26,7 @@ public class TransactionController {
 
     @GET
     @RolesAllowed({Roles.USER})
-    public List<Transaction> findbyUserid(){
+    public List<Transaction> findTransactionUserid(){
         return transactionRepository.findTransactionsByUserid(securityContext.getUserPrincipal().getName());
     }
 

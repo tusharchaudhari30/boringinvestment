@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
+import HomeClient from "../Client/HomeClient";
 import LoginClient from "../Client/LoginClient";
 import Button3 from "../util/buttons/Button3";
 import Card from "../util/Card/Card";
@@ -11,9 +12,16 @@ import TransactionTable from "../util/Table/TransactionTable";
 export default class Home extends Component {
   state = {
     user: null,
+    portfolio: null,
   };
   componentDidMount() {
-    LoginClient.validate().then((user) => this.setState({ user: user }));
+    LoginClient.validate()
+      .then((user) => this.setState({ user: user }))
+      .then(() => {
+        HomeClient.Portfolio().then((portfolio) =>
+          this.setState({ portfolio: portfolio })
+        );
+      });
   }
   logout = () => {
     localStorage.removeItem("token");
@@ -26,7 +34,8 @@ export default class Home extends Component {
     ) {
       return <Navigate to="/login" replace />;
     }
-    if (this.state.user == null) return <div>loading</div>;
+    if (this.state.user == null || this.state.portfolio == null)
+      return <div>loading</div>;
     return (
       <div>
         <div className="border-b border-slate-400 flex flex-wrap justify-between">
@@ -43,17 +52,22 @@ export default class Home extends Component {
         <div className="flex flex-wrap">
           <div className="md:w-2/4 w-full xl:w-1/4">
             <Card title={"Invested"}>
-              <div className="text-center text-4xl py-10 h-40">50,00,000₹</div>
+              <div className="text-center text-4xl py-10 h-40">
+                {this.state.portfolio.invested.toFixed(2)} ₹
+              </div>
             </Card>
           </div>
           <div className="md:w-2/4 w-full xl:w-1/4">
             <Card title={"Holding"}>
               <div className="text-center text-4xl py-10 h-40">
-                100,00,000₹
-                <span className="text-green-400 text-xl">+50%</span>
+                {this.state.portfolio.holding.toFixed(2)} ₹
+                <span className="text-green-400 text-xl">
+                  +{this.state.portfolio.percentageReturn.toFixed(2)} %
+                </span>
                 <div className="w-full text-center">
                   <div className="text-green-400 text-xl">
-                    +5,00,0000₹ <span className="text-sm"> 22% P.A.</span>
+                    +{this.state.portfolio.profit.toFixed(2)}₹{" "}
+                    <span className="text-sm"> 22 % P.A.</span>
                   </div>
                 </div>
               </div>
@@ -72,14 +86,14 @@ export default class Home extends Component {
           <div className="w-full lg:w-1/3 md:w-1/2">
             <Card title={"Holding"}>
               <div className="h-96">
-                <Piechart />
+                <Piechart data={this.state.portfolio.chartModels} />
               </div>
             </Card>
           </div>
           <div className="w-full lg:w-auto md:w-1/2">
             <Card title={"Portfolio"}>
               <div className="md:h-96 h-auto">
-                <PortfolioTable />
+                <PortfolioTable data={this.state.portfolio.stockList} />
               </div>
             </Card>
           </div>

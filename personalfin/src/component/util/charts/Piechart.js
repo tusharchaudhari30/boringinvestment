@@ -4,19 +4,10 @@ import ReactECharts from "echarts-for-react";
 
 export default class Piechart extends Component {
   option = {
-    color: [
-      "black",
-      "black",
-      "black",
-      "black",
-      "black",
-      "black",
-      "black",
-      "black",
-    ],
+    color: ["black"],
     title: {},
     tooltip: {
-      show: false,
+      show: true,
     },
     series: [
       {
@@ -34,23 +25,7 @@ export default class Piechart extends Component {
           },
         },
         radius: ["40%", "70%"],
-        data: [
-          { value: 1048, name: "Apple" },
-          { value: 735, name: "Amazon" },
-          { value: 580, name: "Netflix" },
-          { value: 484, name: "Bank of America" },
-          { value: 300, name: "TCS" },
-          { value: 1048, name: "Apple" },
-          { value: 735, name: "Amazon" },
-          { value: 580, name: "Netflix" },
-          { value: 484, name: "Bank of America" },
-          { value: 300, name: "TCS" },
-          { value: 1048, name: "Apple" },
-          { value: 735, name: "Amazon" },
-          { value: 580, name: "Netflix" },
-          { value: 484, name: "Bank of America" },
-          { value: 300, name: "TCS" },
-        ],
+        data: this.props.data,
         emphasis: {},
         itemStyle: {
           borderColor: "white",
