@@ -27,4 +27,10 @@ jobs:
       - name: build jar
         run: ./gradlew build
       - name: docker build
-        run: docker build -t registry.heroku.com/airpolution/web .
+        run: docker build -t registry.heroku.com/boringinvestmentclub/web .
+      - name: docker login
+        run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+      - name: docker push
+        run: docker push registry.heroku.com/boringinvestmentclub/web
+      - name: heroku release
+        run: HEROKU_API_KEY='${{ secrets.HEROKU_API_KEY }}' heroku container:release --app boringinvestmentclub web
