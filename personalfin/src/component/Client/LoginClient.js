@@ -1,5 +1,5 @@
 class LoginClient {
-  static url = "http://localhost:8080";
+  static url = "";
 
   static async login(username, password) {
     var requestOptions = {
