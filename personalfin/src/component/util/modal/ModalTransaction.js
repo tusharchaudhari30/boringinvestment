@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./ModalTransaction.css";
 export default class ModalTransaction extends Component {
   render() {
     return (
@@ -8,10 +8,7 @@ export default class ModalTransaction extends Component {
           className="min-h-screen fixed bg- bg-black w-full z-10 opacity-60"
           style={{ left: 0, right: 0, top: 0 }}
         ></div>
-        <div
-          className="lg:w-6/12 w-full bg-black fixed opacity-100 border border-gray-500 z-20"
-          style={{ left: "25%", top: "25%" }}
-        >
+        <div className="sm:w-6/12 w-11/12 bg-black fixed opacity-100 border border-gray-500 z-20 modalbgmain">
           <div
             className="w-full border-b text-xl flex flex-wrap justify-between border-gray-500"
             onClick={this.props.changeTransactionVisible}

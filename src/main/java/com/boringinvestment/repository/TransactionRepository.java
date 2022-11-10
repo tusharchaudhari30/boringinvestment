@@ -12,7 +12,7 @@ import java.util.List;
 public class TransactionRepository implements PanacheMongoRepository<Transaction> {
     public List<Transaction> findTransactionsByUserid(String userId,Integer page){
         PanacheQuery<Transaction> transactionPanacheQuery = find("userid",userId);
-        return transactionPanacheQuery.page(Page.of(page,25)).list();
+        return transactionPanacheQuery.page(Page.of(page,5)).list();
     }
     public List<Transaction> findTransactionsByUserid(String userid){
         return list("userid",userid);
