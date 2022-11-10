@@ -22,19 +22,23 @@ export default class TransactionTable extends Component {
   }
 
   nextPage() {
+    this.setState({
+      backendPage: this.state.backendPage + 1,
+    });
     HomeClient.LoadTransactionTable(this.state.backendPage + 1).then((data) => {
       this.setState({
         transactions: data,
-        backendPage: this.state.backendPage + 1,
       });
     });
   }
   prevPage() {
     if (this.state.backendPage === 0) return;
+    this.setState({
+      backendPage: this.state.backendPage - 1,
+    });
     HomeClient.LoadTransactionTable(this.state.backendPage - 1).then((data) => {
       this.setState({
         transactions: data,
-        backendPage: this.state.backendPage - 1,
       });
     });
   }
@@ -121,13 +125,13 @@ export default class TransactionTable extends Component {
         <div className="flex flex-wrap justify-center p-5">
           <div
             className="border p-2 px-4 border-slate-400 mx-2 hover:bg-slate-200 hover:text-black cursor-pointer"
-            onClick={(event) => this.prevPage()}
+            onClick={() => this.prevPage()}
           >
             {"<"}
           </div>
           <div
             className="border p-2 px-4 border-slate-400 mx-2 hover:bg-slate-200 hover:text-black cursor-pointer"
-            onClick={(event) => this.nextPage()}
+            onClick={() => this.nextPage()}
           >
             {">"}
           </div>

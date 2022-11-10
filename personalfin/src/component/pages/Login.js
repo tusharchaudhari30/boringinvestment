@@ -15,10 +15,14 @@ export default class Login extends Component {
     this.setState({ password: event.target.value });
   };
   login = () => {
+    window.navigator.vibrate(20);
     LoginClient.login(this.state.login, this.state.password).then((token) => {
       localStorage.setItem("token", token);
       this.setState({ user: true });
     });
+  };
+  inviteonly = () => {
+    window.navigator.vibrate(200);
   };
   render() {
     if (this.state.user === true) {
@@ -73,7 +77,10 @@ export default class Login extends Component {
               >
                 Log in
               </Button3>
-              <Button3 className="border mx-5 mb-3 h-12 pt-3 p-6">
+              <Button3
+                className="border mx-5 mb-3 h-12 pt-3 p-6"
+                onpress={this.inviteonly}
+              >
                 Invite Only
               </Button3>
             </div>

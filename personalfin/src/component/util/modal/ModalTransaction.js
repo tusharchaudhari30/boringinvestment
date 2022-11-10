@@ -1,6 +1,17 @@
 import React, { Component } from "react";
+import InputAuto from "../input/InputAuto";
 import "./ModalTransaction.css";
 export default class ModalTransaction extends Component {
+  state = {
+    asset: {},
+    amount: 0,
+    average: 0,
+    date: new Date().toDateString(),
+  };
+  changeAsset = (asset) => {
+    this.setState({ asset: asset });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -27,10 +38,7 @@ export default class ModalTransaction extends Component {
                       <label className="">Asset Name : </label>
                     </td>
                     <td className="p-3 pt-6">
-                      <input
-                        className="bg-black focus:outline-none border w-full p-1 text-sm border-gray-300"
-                        type="text"
-                      />
+                      <InputAuto changeAsset={this.changeAsset} />
                     </td>
                   </tr>
                   <tr className="py-3">
@@ -40,6 +48,10 @@ export default class ModalTransaction extends Component {
                     <td className="p-3">
                       <input
                         className="bg-black focus:outline-none border w-full text-sm p-1 border-gray-300"
+                        value={this.state.amount}
+                        onChange={(event) =>
+                          this.setState({ amount: event.target.value })
+                        }
                         type="number"
                       />
                     </td>
@@ -51,6 +63,10 @@ export default class ModalTransaction extends Component {
                     <td className="p-3">
                       <input
                         className="bg-black focus:outline-none border w-full text-sm p-1 border-gray-300"
+                        value={this.state.average}
+                        onChange={(event) =>
+                          this.setState({ average: event.target.value })
+                        }
                         type="number"
                       />
                     </td>
@@ -62,6 +78,10 @@ export default class ModalTransaction extends Component {
                     <td className="p-3">
                       <input
                         className="bg-black focus:outline-none border w-full text-sm p-1 border-gray-300"
+                        onChange={(event) =>
+                          this.setState({ date: event.target.value })
+                        }
+                        value={this.state.date}
                         type="date"
                       />
                     </td>

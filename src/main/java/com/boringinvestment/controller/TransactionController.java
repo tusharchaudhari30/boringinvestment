@@ -28,6 +28,7 @@ public class TransactionController {
     @Path("/{page}")
     @RolesAllowed({Roles.USER})
     public List<Transaction> findTransactionUserid(@PathParam("page")Integer page){
+        if(page<0)page=0;
         return transactionRepository.findTransactionsByUserid(securityContext.getUserPrincipal().getName(),page);
     }
 
