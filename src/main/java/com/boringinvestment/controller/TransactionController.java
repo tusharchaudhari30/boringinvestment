@@ -25,17 +25,19 @@ public class TransactionController {
     SecurityContext securityContext;
 
     @GET
+    @Path("/{page}")
     @RolesAllowed({Roles.USER})
-    public List<Transaction> findTransactionUserid(){
-        return transactionRepository.findTransactionsByUserid(securityContext.getUserPrincipal().getName());
+    public List<Transaction> findTransactionUserid(@PathParam("page")Integer page){
+        return transactionRepository.findTransactionsByUserid(securityContext.getUserPrincipal().getName(),page);
     }
 
     @POST
     @RolesAllowed({Roles.USER})
-    public void saveTransaction(Transaction transaction){
+    public String saveTransaction(Transaction transaction){
         transaction.id=null;
         transaction.userid=securityContext.getUserPrincipal().getName();
         transactionRepository.persist(transaction);
+        return "Saved";
     }
 
     @PUT
