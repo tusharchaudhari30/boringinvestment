@@ -1,5 +1,5 @@
 class HomeClient {
-  static url = "http://localhost:8080";
+  static url = "";
 
   static async Portfolio() {
     var myHeaders = new Headers();
