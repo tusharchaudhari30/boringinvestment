@@ -3,12 +3,13 @@ import "./button.scss";
 export default class Button3 extends Component {
   render() {
     return (
-      <button
+      <div
         className={"btn " + this.props.className}
         onClick={this.props.onpress}
+        onTouchStart={() => window.navigator.vibrate(20)}
       >
         {this.props.children}
-      </button>
+      </div>
     );
   }
 }

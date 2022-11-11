@@ -35,7 +35,7 @@ export default class PortfolioTable extends Component {
                       {stock.quantity}
                     </td>
                     <td className="px-2 py-3 border-slate-600 border">
-                      {stock.quantity * stock.price}
+                      {(stock.quantity * stock.price).toFixed(2)}
                     </td>
                   </tr>
                 </React.Fragment>

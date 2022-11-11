@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HomeClient from "../../Client/HomeClient";
 import InputAuto from "../input/InputAuto";
 import "./ModalTransaction.css";
 export default class ModalTransaction extends Component {
@@ -6,10 +7,31 @@ export default class ModalTransaction extends Component {
     asset: {},
     amount: 0,
     average: 0,
-    date: new Date().toDateString(),
+    date: this.formatDate(new Date()),
   };
+  formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
   changeAsset = (asset) => {
     this.setState({ asset: asset });
+  };
+
+  saveTransaction = () => {
+    HomeClient.saveTransaction(
+      this.state.asset.assetName,
+      this.state.asset.symbol + ".NS",
+      this.state.amount,
+      this.state.average,
+      this.state.date.toString()
+    ).then(() => this.props.changeTransactionVisible());
   };
 
   render() {
@@ -90,7 +112,10 @@ export default class ModalTransaction extends Component {
               </table>
             </div>
             <div className="flex flex-wrap justify-center py-3 pb-6">
-              <button className="focus:outline-none px-6 py-3 border border-slate-300 hover:bg-slate-200 hover:text-black">
+              <button
+                onClick={this.saveTransaction}
+                className="focus:outline-none px-6 py-3 border border-slate-300 hover:bg-slate-200 hover:text-black"
+              >
                 Save
               </button>
             </div>

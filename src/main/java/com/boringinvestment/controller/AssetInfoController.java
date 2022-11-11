@@ -15,6 +15,6 @@ public class AssetInfoController {
     @GET
     @Path("/search")
     public List<Asset> searchListAsset(@QueryParam("keyword") String keyword){
-        return Asset.find("assetName like ?1","/^"+keyword+"/i").list();
+        return Asset.find("assetName like ?1","/"+keyword+"/i").list();
     }
 }

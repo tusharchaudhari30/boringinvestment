@@ -64,11 +64,11 @@ $angle-o: 4px;
   }
 }
 
-button.btn {
+div.btn {
   position: relative;
 }
 
-button:active.btn {
+div:active.btn {
   top: 6px;
   left: -6px;
   box-shadow: none;
