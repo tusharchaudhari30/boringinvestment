@@ -15,15 +15,12 @@ export default class Login extends Component {
     this.setState({ password: event.target.value });
   };
   login = () => {
-    window.navigator.vibrate(20);
     LoginClient.login(this.state.login, this.state.password).then((token) => {
       localStorage.setItem("token", token);
       this.setState({ user: true });
     });
   };
-  inviteonly = () => {
-    window.navigator.vibrate(200);
-  };
+  inviteonly = () => {};
   render() {
     if (this.state.user === true) {
       return <Navigate to="/" replace />;

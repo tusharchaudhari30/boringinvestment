@@ -15,6 +15,13 @@ export default class Home extends Component {
     portfolio: null,
   };
   componentDidMount() {
+    this.loadData();
+    //setInterval(() => this.loadData(), 10000);
+  }
+  updateData = () => {
+    this.loadData();
+  };
+  loadData() {
     LoginClient.validate()
       .then((user) => this.setState({ user: user }))
       .then(() => {
@@ -90,17 +97,17 @@ export default class Home extends Component {
               </div>
             </Card>
           </div>
-          <div className="w-full lg:w-auto md:w-1/2">
+          <div className="w-full lg:w-1/3 md:w-1/2">
             <Card title={"Portfolio"}>
-              <div className="md:h-96 h-auto">
+              <div className="h-auto">
                 <PortfolioTable data={this.state.portfolio.stockList} />
               </div>
             </Card>
           </div>
-          <div className="w-full md:w-auto">
+          <div className="w-full md:w-auto lg:w-1/3">
             <Card title={"Transaction History"}>
-              <div className="md:h-96 h-auto">
-                <TransactionTable />
+              <div className="lg:h-auto">
+                <TransactionTable updateData={this.updateData} />
               </div>
             </Card>
           </div>

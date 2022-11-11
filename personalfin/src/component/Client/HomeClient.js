@@ -58,10 +58,9 @@ class HomeClient {
       redirect: "follow",
     };
 
-    fetch(this.url + "/transaction", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    return fetch(this.url + "/transaction", requestOptions).then((response) =>
+      response.text()
+    );
   }
 
   static async assetList(assetName) {
@@ -81,6 +80,24 @@ class HomeClient {
       this.url + "/asset/search?keyword=" + assetName,
       requestOptions
     ).then((response) => response.json());
+  }
+  static async deleteTransaction(transactionid) {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer " + localStorage.getItem("token")
+    );
+
+    var requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    return fetch(
+      this.url + "/transaction?id=" + transactionid,
+      requestOptions
+    ).then((response) => response.text());
   }
 }
 

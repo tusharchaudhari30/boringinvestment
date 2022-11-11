@@ -13,12 +13,26 @@ export default class TransactionTable extends Component {
     this.setState({
       transactionModalVisible: !this.state.transactionModalVisible,
     });
+    this.props.updateData();
+    this.updateData();
   };
 
-  componentDidMount() {
+  deleteTransaction = (id) => {
+    if (window.confirm("Delete this Transaction ?") === true) {
+      HomeClient.deleteTransaction(id).then(() => {
+        this.updateData();
+      });
+    }
+  };
+
+  updateData() {
     HomeClient.LoadTransactionTable(this.state.backendPage).then((data) =>
       this.setState({ transactions: data })
     );
+  }
+
+  componentDidMount() {
+    this.updateData();
   }
 
   nextPage() {
@@ -54,7 +68,7 @@ export default class TransactionTable extends Component {
             <td className="px-2 py-1 border-slate-400 border">Average</td>
             <td className="px-2 py-1 border-slate-400 border">Quantity</td>
             <td className="px-2 py-1 border-slate-400 border">Date</td>
-            <td className="px-2 py-1 border-slate-400 border">Edit</td>
+            <td className="px-2 py-1 border-slate-400 border">Delete</td>
           </tr>
         </React.Fragment>
       );
@@ -85,7 +99,11 @@ export default class TransactionTable extends Component {
                 )}
               </td>
               <td className="px-2 py-1 border-slate-600 border">
-                <Button1 value={"Edit"} />
+                <Button1
+                  className={"hover:text-red-600 hover:border-red-600"}
+                  value={"Delete"}
+                  onpress={() => this.deleteTransaction(transaction.id)}
+                />
               </td>
             </tr>
           );
@@ -106,6 +124,7 @@ export default class TransactionTable extends Component {
           <Button1
             value={"Add Transaction"}
             onpress={this.changeTransactionVisible}
+            className={"hover:bg-slate-200 hover:text-black"}
           ></Button1>
         </div>
         <table>
@@ -117,7 +136,7 @@ export default class TransactionTable extends Component {
               <th className="px-2 py-1 border-slate-400 border">Average</th>
               <th className="px-2 py-1 border-slate-400 border">Quantity</th>
               <th className="px-2 py-1 border-slate-400 border">Date</th>
-              <th className="px-2 py-1 border-slate-400 border">Edit</th>
+              <th className="px-2 py-1 border-slate-400 border">Delete</th>
             </tr>
             {this.loadTable()}
           </tbody>
