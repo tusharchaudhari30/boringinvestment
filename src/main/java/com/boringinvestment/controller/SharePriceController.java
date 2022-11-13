@@ -15,7 +15,7 @@ public class SharePriceController {
 
     @GET
     @Path("/price")
-    public double getStockPrice(@QueryParam("symbol")String symbol){
+    public double getStockPrice(@QueryParam("symbol") String symbol) {
         return yahoofinanceRest.getStockPrice(symbol);
     }
 }

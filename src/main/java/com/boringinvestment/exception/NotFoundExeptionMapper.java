@@ -1,13 +1,12 @@
 package com.boringinvestment.exception;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-import java.util.Scanner;
-
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import java.util.Scanner;
 
 @Provider
 public class NotFoundExeptionMapper implements ExceptionMapper<NotFoundException> {

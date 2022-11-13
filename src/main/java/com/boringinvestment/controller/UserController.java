@@ -4,9 +4,7 @@ import com.boringinvestment.model.User;
 import com.boringinvestment.security.TokenService;
 import org.jboss.logmanager.Logger;
 
-import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,10 +27,10 @@ public class UserController {
 
     @GET
     @Path("/login")
-    public String login(@QueryParam("login")String login, @QueryParam("password") String password) {
+    public String login(@QueryParam("login") String login, @QueryParam("password") String password) {
         User existingUser = User.find("login", login).firstResult();
-        if(existingUser == null || !existingUser.password.equals(password)) {
-            LOGGER.warning("User not found:"+login);
+        if (existingUser == null || !existingUser.password.equals(password)) {
+            LOGGER.warning("User not found:" + login);
             throw new WebApplicationException(Response.status(404).entity("No user found or password is incorrect").build());
         }
         return tokenService.generateUserToken(existingUser.email);

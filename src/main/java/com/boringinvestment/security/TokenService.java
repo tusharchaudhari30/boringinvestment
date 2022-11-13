@@ -19,7 +19,7 @@ public class TokenService {
     }
 
     public String generateServiceToken(String serviceId, String serviceName) {
-        return generateToken(serviceId,serviceName,Roles.SERVICE);
+        return generateToken(serviceId, serviceName, Roles.SERVICE);
     }
 
     public String generateToken(String subject, String... roles) {

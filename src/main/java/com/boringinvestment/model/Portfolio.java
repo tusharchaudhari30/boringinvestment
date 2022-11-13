@@ -21,17 +21,18 @@ public class Portfolio {
     public List<ChartModel> chartModels;
 
     public Portfolio() {
-        this.invested= (double) 0;
-        this.holding= (double) 0;
-        stockList=new ArrayList<>();
-        chartModels=new ArrayList<>();
-        transactionList=new ArrayList<>();
+        this.invested = (double) 0;
+        this.holding = (double) 0;
+        stockList = new ArrayList<>();
+        chartModels = new ArrayList<>();
+        transactionList = new ArrayList<>();
     }
-    public void addStock(@NotNull Stock stock){
-        invested=invested+(stock.average*stock.quantity);
-        holding=holding+(stock.price*stock.quantity);
+
+    public void addStock(@NotNull Stock stock) {
+        invested = invested + (stock.average * stock.quantity);
+        holding = holding + (stock.price * stock.quantity);
         stockList.add(stock);
-        chartModels.add(new ChartModel(stock.assetName,stock.price*stock.quantity));
+        chartModels.add(new ChartModel(stock.assetName, stock.price * stock.quantity));
     }
 
 }

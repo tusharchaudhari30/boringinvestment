@@ -12,5 +12,5 @@ import javax.ws.rs.QueryParam;
 public interface ClientRestYahoo {
     @GET
     @Path("/v8/finance/chart/{symbol}")
-    SharePriceRequest getSharePrice(@PathParam("symbol") String symbol,@QueryParam("interval") String interval,@QueryParam("range") String range);
+    SharePriceRequest getSharePrice(@PathParam("symbol") String symbol, @QueryParam("interval") String interval, @QueryParam("range") String range);
 }
