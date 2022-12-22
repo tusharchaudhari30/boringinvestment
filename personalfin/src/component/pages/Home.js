@@ -47,7 +47,7 @@ export default class Home extends Component {
       return <Navigate to="/login" replace />;
     }
     if (this.state.user == null || this.state.portfolio == null)
-      return <div>loading</div>;
+      return <div className="text-3xl text-center pt-28"> Loading </div>;
     return (
       <div>
         <div className="border-b border-slate-400 flex flex-wrap justify-between">

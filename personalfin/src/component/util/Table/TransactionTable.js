@@ -37,24 +37,21 @@ export default class TransactionTable extends Component {
 
   nextPage() {
     if (this.state.transactions.pages - 1 <= this.state.backendPage) return;
-    this.setState({
-      backendPage: this.state.backendPage + 1,
-    });
     HomeClient.LoadTransactionTable(this.state.backendPage + 1).then((data) => {
       this.setState({
         transactions: data,
+        backendPage: this.state.backendPage + 1,
       });
     });
   }
 
   prevPage() {
     if (this.state.backendPage === 0) return;
-    this.setState({
-      backendPage: this.state.backendPage - 1,
-    });
+
     HomeClient.LoadTransactionTable(this.state.backendPage - 1).then((data) => {
       this.setState({
         transactions: data,
+        backendPage: this.state.backendPage - 1,
       });
     });
   }
@@ -64,12 +61,12 @@ export default class TransactionTable extends Component {
       return (
         <React.Fragment>
           <tr>
-            <td className="px-2 py-1 border-slate-400 border">No</td>
-            <td className="px-2 py-1 border-slate-400 border">Asset Name</td>
-            <td className="px-2 py-1 border-slate-400 border">Average</td>
-            <td className="px-2 py-1 border-slate-400 border">Quantity</td>
-            <td className="px-2 py-1 border-slate-400 border">Date</td>
-            <td className="px-2 py-1 border-slate-400 border">Delete</td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
           </tr>
         </React.Fragment>
       );
