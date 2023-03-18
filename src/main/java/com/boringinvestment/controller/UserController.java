@@ -27,10 +27,10 @@ public class UserController {
 
     @GET
     @Path("/login")
-    public String login(@QueryParam("login") String login, @QueryParam("password") String password) {
-        User existingUser = User.find("login", login).firstResult();
+    public String login(@QueryParam("email") String email, @QueryParam("password") String password) {
+        User existingUser = User.find("email", email).firstResult();
         if (existingUser == null || !existingUser.password.equals(password)) {
-            LOGGER.warning("User not found:" + login);
+            LOGGER.warning("User not found:" + email);
             throw new WebApplicationException(Response.status(404).entity("No user found or password is incorrect").build());
         }
         return tokenService.generateUserToken(existingUser.email);

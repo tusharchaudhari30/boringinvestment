@@ -25,7 +25,7 @@ public class TokenService {
     public String generateToken(String subject, String... roles) {
         try {
             JwtClaims jwtClaims = new JwtClaims();
-            jwtClaims.setIssuer("DonauTech"); // change to your company
+            jwtClaims.setIssuer("personalfin"); // change to your company
             jwtClaims.setJwtId(UUID.randomUUID().toString());
             jwtClaims.setSubject(subject);
             jwtClaims.setClaim(Claims.upn.name(), subject);
@@ -33,7 +33,6 @@ public class TokenService {
             jwtClaims.setAudience("using-jwt");
             jwtClaims.setExpirationTimeMinutesInTheFuture(60); // TODO specify how long do you need
             String token = TokenUtils.generateTokenString(jwtClaims);
-            LOGGER.info("TOKEN generated: " + token);
             return token;
         } catch (Exception e) {
             e.printStackTrace();

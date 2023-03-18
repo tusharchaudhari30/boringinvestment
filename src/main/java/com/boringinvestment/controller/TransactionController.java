@@ -12,7 +12,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.List;
 import java.util.Map;
 
 @Path("/transaction")
@@ -30,7 +29,7 @@ public class TransactionController {
     @GET
     @Path("/{page}")
     @RolesAllowed({Roles.USER})
-    public Map<String,Object> findTransactionUserid(@PathParam("page") Integer page) {
+    public Map<String, Object> findTransactionUserid(@PathParam("page") Integer page) {
         if (page < 0) page = 0;
         return transactionRepository.findTransactionsByUserid(securityContext.getUserPrincipal().getName(), page);
     }
