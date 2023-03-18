@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import HomeClient from "../../Client/HomeClient";
 import Button1 from "../buttons/Button1";
 import ModalTransaction from "../modal/ModalTransaction";
@@ -21,6 +22,8 @@ export default class TransactionTable extends Component {
     if (window.confirm("Delete this Transaction ?") === true) {
       HomeClient.deleteTransaction(id).then(() => {
         this.updateData();
+        this.props.updateData();
+        toast.success("Transaction Deleted");
       });
     }
   };
@@ -90,7 +93,7 @@ export default class TransactionTable extends Component {
                 {key + this.state.backendPage * 5 + 1}
               </td>
               <td className="px-2 py-1 border-slate-600 border">
-                <p className="truncate md:w-52 w-24">{transaction.assetName}</p>
+                <p className="truncate md:w-auto w-24 ">{transaction.assetName}</p>
               </td>
               <td className="px-2 py-1 border-slate-600 border">
                 {transaction.average}
