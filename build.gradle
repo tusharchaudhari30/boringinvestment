@@ -21,6 +21,7 @@ dependencies {
     implementation group: 'io.quarkus', name: 'quarkus-smallrye-jwt'
     implementation group: 'io.quarkus', name: 'quarkus-rest-client'
     implementation group: 'io.quarkus', name: 'quarkus-rest-client-jackson'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
