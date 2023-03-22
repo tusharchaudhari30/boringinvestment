@@ -36,11 +36,6 @@ public class TokenUtils {
 
         claims.setIssuedAt(NumericDate.fromSeconds(currentTimeInSecs));
         claims.setClaim(Claims.auth_time.name(), NumericDate.fromSeconds(currentTimeInSecs));
-
-        for (Map.Entry<String, Object> entry : claims.getClaimsMap().entrySet()) {
-            System.out.printf("\tAdded claim: %s, value: %s\n", entry.getKey(), entry.getValue());
-        }
-
         JsonWebSignature jws = new JsonWebSignature();
         jws.setPayload(claims.toJson());
         jws.setKey(privateKey);

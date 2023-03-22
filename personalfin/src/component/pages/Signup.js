@@ -35,7 +35,7 @@ export default class Signup extends Component {
       return;
     }
     LoginClient.signup(this.state.email, this.state.password).then((res) => {
-      if (res === "done") {
+      if (res === "Done") {
         toast.success("Account Created !");
       } else {
         toast.error(res);
