@@ -5,4 +5,4 @@ COPY --chown=1001 build/quarkus-app/lib/ /deployments/lib/
 COPY --chown=1001 build/quarkus-app/*.jar /deployments/
 COPY --chown=1001 build/quarkus-app/app/ /deployments/app/
 COPY --chown=1001 build/quarkus-app/quarkus/ /deployments/quarkus/
-ENTRYPOINT ["java","-Dquarkus.http.port=$PORT","-jar","/deployments/quarkus-run.jar"]
+ENTRYPOINT ["java","-jar","/deployments/quarkus-run.jar"]
