@@ -35,6 +35,7 @@ class HomeClient {
       (response) => response.json()
     );
   }
+
   static async saveTransaction(assetName, ticker, amount, average, date) {
     const myHeaders = new Headers();
     myHeaders.append(
@@ -81,6 +82,7 @@ class HomeClient {
       requestOptions
     ).then((response) => response.json());
   }
+
   static async deleteTransaction(transactionid) {
     var myHeaders = new Headers();
     myHeaders.append(

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import HomeClient from "../../Client/HomeClient";
 import Button1 from "../buttons/Button1";
 import ModalTransaction from "../modal/ModalTransaction";
@@ -21,6 +22,8 @@ export default class TransactionTable extends Component {
     if (window.confirm("Delete this Transaction ?") === true) {
       HomeClient.deleteTransaction(id).then(() => {
         this.updateData();
+        this.props.updateData();
+        toast.success("Transaction Deleted");
       });
     }
   };
@@ -36,23 +39,22 @@ export default class TransactionTable extends Component {
   }
 
   nextPage() {
-    this.setState({
-      backendPage: this.state.backendPage + 1,
-    });
+    if (this.state.transactions.pages - 1 <= this.state.backendPage) return;
     HomeClient.LoadTransactionTable(this.state.backendPage + 1).then((data) => {
       this.setState({
         transactions: data,
+        backendPage: this.state.backendPage + 1,
       });
     });
   }
+
   prevPage() {
     if (this.state.backendPage === 0) return;
-    this.setState({
-      backendPage: this.state.backendPage - 1,
-    });
+
     HomeClient.LoadTransactionTable(this.state.backendPage - 1).then((data) => {
       this.setState({
         transactions: data,
+        backendPage: this.state.backendPage - 1,
       });
     });
   }
@@ -62,30 +64,36 @@ export default class TransactionTable extends Component {
       return (
         <React.Fragment>
           <tr>
-            <td className="px-2 py-1 border-slate-400 border">No</td>
-            <td className="px-2 py-1 border-slate-400 border">Ticker</td>
-            <td className="px-2 py-1 border-slate-400 border">Asset Name</td>
-            <td className="px-2 py-1 border-slate-400 border">Average</td>
-            <td className="px-2 py-1 border-slate-400 border">Quantity</td>
-            <td className="px-2 py-1 border-slate-400 border">Date</td>
-            <td className="px-2 py-1 border-slate-400 border">Delete</td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
+            <td className="px-2 py-1 border-slate-400 border"></td>
           </tr>
         </React.Fragment>
       );
     }
     return (
       <React.Fragment>
-        {this.state.transactions.map((transaction, key) => {
+        {this.state.transactions.length === 0 && (
+          <tr>
+            <td
+              colSpan={6}
+              className="text-center px-2 py-1 border-slate-600 border"
+            >
+              Ended Go Back
+            </td>
+          </tr>
+        )}
+        {this.state.transactions.transaction.map((transaction, key) => {
           return (
             <tr key={key}>
               <td className="px-2 py-1 border-slate-600 border">
                 {key + this.state.backendPage * 5 + 1}
               </td>
               <td className="px-2 py-1 border-slate-600 border">
-                {transaction.ticker}
-              </td>
-              <td className="px-2 py-1 border-slate-600 border">
-                {transaction.assetName}
+                <p className="truncate md:w-auto w-24 ">{transaction.assetName}</p>
               </td>
               <td className="px-2 py-1 border-slate-600 border">
                 {transaction.average}
@@ -125,13 +133,12 @@ export default class TransactionTable extends Component {
             value={"Add Transaction"}
             onpress={this.changeTransactionVisible}
             className={"hover:bg-slate-200 hover:text-black"}
-          ></Button1>
+          />
         </div>
         <table>
           <tbody>
             <tr>
               <th className="px-2 py-1 border-slate-400 border">No</th>
-              <th className="px-2 py-1 border-slate-400 border">Ticker</th>
               <th className="px-2 py-1 border-slate-400 border">Asset Name</th>
               <th className="px-2 py-1 border-slate-400 border">Average</th>
               <th className="px-2 py-1 border-slate-400 border">Quantity</th>

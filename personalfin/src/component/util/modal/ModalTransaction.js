@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import HomeClient from "../../Client/HomeClient";
 import InputAuto from "../input/InputAuto";
 import "./ModalTransaction.css";
@@ -9,6 +10,7 @@ export default class ModalTransaction extends Component {
     average: 0,
     date: this.formatDate(new Date()),
   };
+
   formatDate(date) {
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
@@ -20,18 +22,38 @@ export default class ModalTransaction extends Component {
 
     return [year, month, day].join("-");
   }
+
   changeAsset = (asset) => {
     this.setState({ asset: asset });
   };
 
   saveTransaction = () => {
+    if (
+      this.state.asset.assetName === "" ||
+      this.state.asset.assetName === undefined
+    ) {
+      toast.error("Please Enter Asset Name");
+      return;
+    }
+    if (this.state.amount === 0) {
+      toast.error("Please Enter Amount");
+      return;
+    }
+    if (this.state.average === 0) {
+      toast.error("Please Enter Average Amount");
+      return;
+    }
     HomeClient.saveTransaction(
       this.state.asset.assetName,
       this.state.asset.symbol + ".NS",
       this.state.amount,
       this.state.average,
       this.state.date.toString()
-    ).then(() => this.props.changeTransactionVisible());
+    ).then((res) => {
+      if (res === "Failed") toast.error("Transaction save Failed");
+      if (res === "OK") toast.success("Transaction Saved");
+      this.props.changeTransactionVisible();
+    });
   };
 
   render() {

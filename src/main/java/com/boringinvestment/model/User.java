@@ -6,17 +6,17 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 
 @MongoEntity(collection = "user")
 public class User extends PanacheMongoEntity {
-    public String login;
     public String email;
+
     @JsonIgnore
     public String password;
 
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

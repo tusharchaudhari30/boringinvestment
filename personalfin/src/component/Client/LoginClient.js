@@ -2,24 +2,25 @@ class LoginClient {
   static url = "";
 
   static async login(username, password) {
-    var requestOptions = {
+    let requestOptions = {
       method: "GET",
       redirect: "follow",
     };
 
     return fetch(
-      this.url + `/users/login?login=${username}&password=${password}`,
+      this.url + `/users/login?email=${username}&password=${password}`,
       requestOptions
     ).then((response) => response.text());
   }
+
   static async validate() {
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
       "Bearer " + localStorage.getItem("token")
     );
 
-    var requestOptions = {
+    let requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -27,6 +28,27 @@ class LoginClient {
 
     return fetch(this.url + "/hello/me", requestOptions).then(
       (response) => response.status === 200
+    );
+  }
+
+  static async signup(email, password) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      email: email,
+      password: password,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    return fetch(this.url + "/users/signup", requestOptions).then((response) =>
+      response.text()
     );
   }
 }
