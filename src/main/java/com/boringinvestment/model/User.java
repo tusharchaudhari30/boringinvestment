@@ -8,6 +8,7 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 public class User extends PanacheMongoEntity {
     public String email;
 
+    @JsonIgnore
     public String password;
 
     @Override

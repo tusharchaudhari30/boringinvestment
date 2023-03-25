@@ -37,11 +37,11 @@ public class TransactionController {
     @POST
     @RolesAllowed({Roles.USER})
     public Response saveTransaction(Transaction transaction) {
-        if (transaction.quantity == 0 || transaction.average == 0) return Response.status(405).build();
+        if (transaction.quantity == 0 || transaction.average == 0) return Response.status(405).entity("Failed").build();
         transaction.id = null;
         transaction.userid = securityContext.getUserPrincipal().getName();
         transactionRepository.persist(transaction);
-        return Response.ok().status(200).build();
+        return Response.ok("OK").status(200).build();
     }
 
     @PUT
