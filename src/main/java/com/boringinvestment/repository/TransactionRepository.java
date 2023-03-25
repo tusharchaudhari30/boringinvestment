@@ -4,7 +4,6 @@ import com.boringinvestment.model.Transaction;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import io.quarkus.mongodb.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
-
 import javax.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
 import java.util.List;
