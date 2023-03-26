@@ -9,3 +9,6 @@ echo "Making copying files"
 mkdir "../src/main/resources/META-INF/resources/"
 cp -r build/* ../src/main/resources/META-INF/resources/
 echo "Files copied successfully"
+cd ..
+echo "building gradle"
+gradle build
