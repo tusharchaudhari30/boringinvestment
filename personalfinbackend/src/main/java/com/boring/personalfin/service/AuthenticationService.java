@@ -68,7 +68,7 @@ public class AuthenticationService {
         //save user in auth service
         authFeign.saveUser(appUserDto);
         //save user in mongodb
-        User user = new User(null, appUserDto.getEmail());
+        User user = new User(null, appUserDto.getEmail(),appUserDto.getPassword());
         userRepository.save(user);
         return "done";
     }
