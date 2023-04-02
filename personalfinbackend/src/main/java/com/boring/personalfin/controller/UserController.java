@@ -1,15 +1,12 @@
 package com.boring.personalfin.controller;
 
 
-import com.boring.personalfin.exception.TokenValidationFailedException;
-import com.boring.personalfin.exception.UserAlreadyExistException;
 import com.boring.personalfin.model.dao.Assets;
 import com.boring.personalfin.model.dto.AppUserDto;
 import com.boring.personalfin.model.dto.Portfolio;
 import com.boring.personalfin.repository.AssetRepository;
 import com.boring.personalfin.service.AuthenticationService;
 import com.boring.personalfin.service.PortfolioService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,31 +32,20 @@ public class UserController {
     }
 
 
-    @GetMapping("/hello/me")
+    @GetMapping("/user")
     public ResponseEntity<?> hello(@RequestHeader("Authorization") String token) {
-//        try {
+        token = token.substring(7);
         return ResponseEntity.ok(authenticationService.validate(token));
-//        } catch (TokenValidationFailedException tokenValidationFailedException) {
-//            return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED);
-//        }
     }
 
-    @GetMapping("/users/login")
+    @GetMapping("/user/login")
     public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
-        try {
-            return ResponseEntity.ok(authenticationService.login(email, password));
-        } catch (TokenValidationFailedException tokenValidationFailedException) {
-            return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED);
-        }
+        return ResponseEntity.ok(authenticationService.login(email, password));
     }
 
-    @PostMapping("/users/signup")
+    @PostMapping("/user/signup")
     public ResponseEntity<?> signUpUser(@RequestBody AppUserDto appUserDto) {
-        try {
-            return ResponseEntity.ok(authenticationService.saveUser(appUserDto));
-        } catch (UserAlreadyExistException e) {
-            return ResponseEntity.badRequest().body("User Already Exist.");
-        }
+        return ResponseEntity.ok(authenticationService.saveUser(appUserDto));
     }
 
     @GetMapping("/asset/search")

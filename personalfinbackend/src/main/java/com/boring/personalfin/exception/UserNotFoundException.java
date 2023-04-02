@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @NoArgsConstructor
-@ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UserAlreadyExistException extends UserCustomException {
-    public UserAlreadyExistException(String message) {
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class UserNotFoundException extends UserCustomException {
+    public UserNotFoundException(String message) {
         super(message);
     }
 }

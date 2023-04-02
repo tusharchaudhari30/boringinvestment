@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -42,8 +43,7 @@ public class PortfolioService {
         Integer transactionCount = transactionRepository.countByUserid(userid);
         long count = transactionCount / 5;
         if (transactionCount % 5 != 0) count += 1;
-        map.put("pages", count);
-        log.info("Retrieved {} transactions for user {} with {} pages", transactionCount, userid, count);
+        map.put("pages", Optional.of(count));
         return map;
     }
 
@@ -76,21 +76,21 @@ public class PortfolioService {
             transactionList.forEach(transaction -> {
                 if (quantityMap.containsKey(transaction.getTicker())) {
                     Stock stock = quantityMap.get(transaction.getTicker());
-                    stock.quantity = quantityMap.get(transaction.getTicker()).quantity + transaction.getQuantity();
-                    stock.average = (stock.average + (transaction.getAverage() * transaction.getQuantity())) / (transaction.getQuantity() + 1);
+                    stock.quantity = (Integer) (quantityMap.get(transaction.getTicker()).quantity + transaction.getQuantity());
+                    stock.average = (Double) ((stock.average + (transaction.getAverage() * transaction.getQuantity())) / (transaction.getQuantity() + 1));
                     quantityMap.put(transaction.getTicker(), stock);
                 } else {
-                    quantityMap.put(transaction.getTicker(), new Stock(transaction.getAssetName(), transaction.getTicker(), transaction.getAverage(), 500.00, transaction.getQuantity()));
+                    quantityMap.put(transaction.getTicker(), new Stock(transaction.getAssetName(), transaction.getTicker(), transaction.getAverage(), Double.valueOf(500.00), transaction.getQuantity()));
                 }
             });
             portfolio.transactionList = transactionList;
             quantityMap.forEach((s, stock) -> portfolio.addStock(stock));
             // calculate the profit and percentage return for the portfolio
-            portfolio.profit = portfolio.holding - portfolio.invested;
-            portfolio.percentageReturn = portfolio.profit / portfolio.invested * 100;
+            portfolio.profit = (Double) (portfolio.holding - portfolio.invested);
+            portfolio.percentageReturn = (Double) (portfolio.profit / portfolio.invested * 100);
         } else {
-            portfolio.profit = 0.0;
-            portfolio.percentageReturn = 0.0;
+            portfolio.profit = (Double) 0.0;
+            portfolio.percentageReturn = (Double) 0.0;
         }
         log.info("Retrieved portfolio for user {} with profit {} and percentage return {}", name, portfolio.profit, portfolio.percentageReturn);
         return portfolio;

@@ -1,12 +1,10 @@
 package com.boring.personalfin.service;
 
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class JwtUtilServiceTest {
@@ -15,8 +13,8 @@ class JwtUtilServiceTest {
 
     @Test
     void testToken() {
-        String subject="user@valid.com";
-        String token=jwtUtilService.generateToken(subject);
-        assertEquals(subject,jwtUtilService.getSubjectFromToken(token));
+        String subject = "user@valid.com";
+        String token = jwtUtilService.generateToken(subject);
+        assertEquals(subject, jwtUtilService.getSubjectFromToken(token));
     }
 }
