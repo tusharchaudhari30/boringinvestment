@@ -1,6 +1,6 @@
 FROM amazoncorretto:17
-COPY --chown=1001 build/quarkus-app/lib/ /deployments/lib/
-COPY --chown=1001 build/quarkus-app/*.jar /deployments/
-COPY --chown=1001 build/quarkus-app/app/ /deployments/app/
-COPY --chown=1001 build/quarkus-app/quarkus/ /deployments/quarkus/
-ENTRYPOINT ["java","-Dquarkus.http.port=${PORT}","-jar","/deployments/quarkus-run.jar"]
+VOLUME /tmp
+EXPOSE 8080
+ARG JAR_FILE=build/libs/personalfin-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

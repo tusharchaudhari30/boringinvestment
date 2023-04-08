@@ -1,14 +1,15 @@
-rm -r src/main/resources/META-INF/resources
+rm -r personalfinbackend/src/main/resources/static/*
 cd personalfin
 echo "Running npm install"
 npm install
 echo "Running build"
 npm run build
 echo "Build successfully"
-echo "Making copying files"
-mkdir "../src/main/resources/META-INF/resources/"
-cp -r build/* ../src/main/resources/META-INF/resources/
-echo "Files copied successfully"
 cd ..
+echo "Making copying files"
+cp -r personalfin/build/static personalfinbackend/src/main/resources/static/
+cp personalfin/build/index.html personalfinbackend/src/main/resources/templates/index.html
+echo "Files copied successfully"
+cd personalfinbackend
 echo "building gradle"
-gradle build
+gradle clean build jacocoTestReport jacocoTestCoverageVerification

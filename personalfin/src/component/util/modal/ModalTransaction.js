@@ -50,8 +50,8 @@ export default class ModalTransaction extends Component {
       this.state.average,
       this.state.date.toString()
     ).then((res) => {
-      if (res === "Failed") toast.error("Transaction save Failed");
-      if (res === "OK") toast.success("Transaction Saved");
+      if (res.message === "Failed") toast.error("Transaction save Failed");
+      if (res.message === "OK") toast.success("Transaction Saved");
       this.props.changeTransactionVisible();
     });
   };

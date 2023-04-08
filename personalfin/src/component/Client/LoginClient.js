@@ -8,9 +8,9 @@ class LoginClient {
     };
 
     return fetch(
-      this.url + `/users/login?email=${username}&password=${password}`,
+      this.url + `/user/login?email=${username}&password=${password}`,
       requestOptions
-    ).then((response) => response.text());
+    );
   }
 
   static async validate() {
@@ -26,7 +26,7 @@ class LoginClient {
       redirect: "follow",
     };
 
-    return fetch(this.url + "/hello/me", requestOptions).then(
+    return fetch(this.url + "/user", requestOptions).then(
       (response) => response.status === 200
     );
   }
@@ -47,8 +47,8 @@ class LoginClient {
       redirect: "follow",
     };
 
-    return fetch(this.url + "/users/signup", requestOptions).then((response) =>
-      response.text()
+    return fetch(this.url + "/user/signup", requestOptions).then((response) =>
+      response.json()
     );
   }
 }

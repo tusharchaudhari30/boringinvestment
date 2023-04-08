@@ -1,0 +1,17 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://app:nwChwgPseALcnjJj@cluster0.0tkbxot.mongodb.net
+      database: theboringinvestment
+  application:
+    name: portfoliobackend
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+  port: 8080
+jwt:
+  secret: GitHJGUNFqx3544fbcFY1RCrrDLZDtOY
