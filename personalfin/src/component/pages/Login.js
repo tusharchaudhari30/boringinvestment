@@ -30,14 +30,17 @@ export default class Login extends Component {
       toast.error("Enter Password.");
       return;
     }
-    LoginClient.login(this.state.login, this.state.password).then((token) => {
-      if (token === "Unauthorized") {
-        toast.error("Incorrect Password");
-      } else {
-        localStorage.setItem("token", token);
-        this.setState({ user: true });
-      }
-    });
+    LoginClient.login(this.state.login, this.state.password)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.statuscode === "UNAUTHORIZED") {
+          toast.error(response.message);
+        } else {
+          localStorage.setItem("token", response.token);
+          this.setState({ user: true });
+        }
+      });
   };
   signup = () => {
     this.setState({ signup: true });

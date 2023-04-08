@@ -20,10 +20,12 @@ export default class TransactionTable extends Component {
 
   deleteTransaction = (id) => {
     if (window.confirm("Delete this Transaction ?") === true) {
-      HomeClient.deleteTransaction(id).then(() => {
-        this.updateData();
-        this.props.updateData();
-        toast.success("Transaction Deleted");
+      HomeClient.deleteTransaction(id).then((res) => {
+        if (res === "delete") {
+          this.updateData();
+          this.props.updateData();
+          toast.success("Transaction Deleted");
+        }
       });
     }
   };
@@ -93,7 +95,9 @@ export default class TransactionTable extends Component {
                 {key + this.state.backendPage * 5 + 1}
               </td>
               <td className="px-2 py-1 border-slate-600 border">
-                <p className="truncate md:w-auto w-24 ">{transaction.assetName}</p>
+                <p className="truncate md:w-auto w-24 ">
+                  {transaction.assetName}
+                </p>
               </td>
               <td className="px-2 py-1 border-slate-600 border">
                 {transaction.average}

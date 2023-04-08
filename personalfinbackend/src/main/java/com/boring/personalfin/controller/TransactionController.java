@@ -2,6 +2,7 @@ package com.boring.personalfin.controller;
 
 
 import com.boring.personalfin.model.dao.Transaction;
+import com.boring.personalfin.model.dto.ToastMessage;
 import com.boring.personalfin.repository.TransactionRepository;
 import com.boring.personalfin.service.PortfolioService;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin()
 public class TransactionController {
     final
     PortfolioService portfolioService;
@@ -29,12 +30,12 @@ public class TransactionController {
     }
 
     @PostMapping("/transaction")
-    public ResponseEntity<String> saveTransaction(@RequestHeader("Authorization") String token, @RequestBody Transaction transaction) {
+    public ResponseEntity<ToastMessage> saveTransaction(@RequestHeader("Authorization") String token, @RequestBody Transaction transaction) {
         if (transaction.getQuantity() == 0 || transaction.getAverage() == 0)
-            return ResponseEntity.status(405).body("Failed");
+            return ResponseEntity.status(405).body(new ToastMessage("Failed"));
 
         portfolioService.saveTransaction(token, transaction);
-        return ResponseEntity.status(200).body("OK");
+        return ResponseEntity.status(200).body(new ToastMessage("OK"));
     }
 
     @DeleteMapping("/transaction")
