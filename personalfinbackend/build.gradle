@@ -1,7 +1,9 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.5'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id "org.shipkit.shipkit-auto-version" version "2.0.5"
+    id "org.shipkit.shipkit-changelog" version "2.0.1"
 }
 
 group = 'com.boring'
@@ -19,7 +21,7 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2022.0.2")
+    set('springCloudVersion', "2023.0.0")
 }
 
 dependencies {
@@ -35,7 +37,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api'
 }
 
 dependencyManagement {
@@ -43,6 +45,8 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
+
+apply from: "gradle/release.gradle"
 
 tasks.named('test') {
     useJUnitPlatform()
