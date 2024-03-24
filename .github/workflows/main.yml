@@ -30,13 +30,13 @@ jobs:
         with:
           java-version: 17
       - name: 3. Perform build
-        run: gradle build
+        run: ./gradlew build
       - name: 4. Perform release
         # Release job, only for pushes to the main development branch
         if: github.event_name == 'push'
           && github.ref == 'refs/heads/master'
           && github.repository == 'shipkit/shipkit-demo'
           && !contains(toJSON(github.event.commits.*.message), '[skip release]')
-        run: gradle githubRelease
+        run: ./gradlew githubRelease
         env:
           GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
