@@ -35,7 +35,7 @@ jobs:
         # Release job, only for pushes to the main development branch
         if: github.event_name == 'push'
           && github.ref == 'refs/heads/master'
-          && github.repository == 'shipkit/shipkit-demo'
+          && github.repository == 'tusharchaudhari30/boringinvestment'
           && !contains(toJSON(github.event.commits.*.message), '[skip release]')
         run: ./gradlew githubRelease
         env:
