@@ -1,13 +1,52 @@
-# boringinvestment Project
-This project is built on top of react and quarkus.
+# Boring Investment Club
+## A Finance Portfolio Management System
 
-## Running the project.
-After cloneing the project. You need to run React and Quarkus separately in devmode.
+Boring Investment Club is a personal finance project focusing on portfolio management. Users can add transactions, view asset allocation, and track portfolio returns.
 
-To start react application type following commands
-```
-cd personalfin
-npm install
-npm start
-```
-after running react application successfully make sure the client has configured url correctly in component/client folder of src.
+## Table of Contents
+
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
+## Technologies Used
+
+- Front-end: JavaScript with React
+- Back-end: Java with Spring Boot and MongoDB
+- Charting: eChart.js library
+
+## Features
+
+- Portfolio Management
+- Transaction Tracking
+- Asset Allocation Charts
+- Portfolio Returns Calculation
+
+## Installation
+
+No installation required. Simply sign up and log in to the website to start using the project.
+
+## Usage
+
+1. Sign up for an account on the project website.
+2. Log in to access your portfolio details and charts.
+3. Add transactions to track your investments.
+4. Monitor asset allocation and portfolio returns.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgements
+
+- eChart.js for charting capabilities.
+- Spring Boot for the back-end framework.
+- MongoDB for database management.
