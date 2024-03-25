@@ -1,4 +1,5 @@
 # Boring Investment Club
+
 ## A Finance Portfolio Management System
 
 Boring Investment Club is a personal finance project focusing on portfolio management. Users can add transactions, view asset allocation, and track portfolio returns.
@@ -12,6 +13,7 @@ Boring Investment Club is a personal finance project focusing on portfolio manag
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
+- [Screnshots](#screenshots)
 
 ## Technologies Used
 
@@ -50,3 +52,25 @@ This project is licensed under the MIT License.
 - eChart.js for charting capabilities.
 - Spring Boot for the back-end framework.
 - MongoDB for database management.
+
+## Screenshots
+
+### Login
+
+![Login](documentation/screenshot/login.png)
+
+### Home Page
+
+![Home](documentation/screenshot/home.png)
+
+### Add Transaction
+
+![Transaction](documentation/screenshot/searchstock.png)
+
+### Validation Toast
+
+![Validation](documentation/screenshot/toast.png)
+
+### Save Callback
+
+![save](documentation/screenshot/callbacktoast.png)
